@@ -144,7 +144,7 @@ export async function createContentGenerator(
     const customHeadersEnv =
       process.env['GEMINI_CLI_CUSTOM_HEADERS'] || undefined;
     const userAgent =
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36';
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36';
     const customHeadersMap = parseCustomHeaders(customHeadersEnv);
     const apiKeyAuthMechanism =
       process.env['GEMINI_API_KEY_AUTH_MECHANISM'] || 'x-goog-api-key';
@@ -155,6 +155,14 @@ export async function createContentGenerator(
       'User-Agent': userAgent,
       Origin: 'https://gemini.google.com',
       Referer: 'https://gemini.google.com/',
+      'Sec-CH-UA':
+        '"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"',
+      'Sec-CH-UA-Mobile': '?0',
+      'Sec-CH-UA-Platform': '"macOS"',
+      'X-Same-Domain': '1',
+      'Sec-Fetch-Site': 'cross-site',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Dest': 'empty',
     };
 
     if (
