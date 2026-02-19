@@ -23,7 +23,6 @@ import { InstallationManager } from '../utils/installationManager.js';
 import { FakeContentGenerator } from './fakeContentGenerator.js';
 import { parseCustomHeaders } from '../utils/customHeaderUtils.js';
 import { RecordingContentGenerator } from './recordingContentGenerator.js';
-import { getVersion, resolveModel } from '../../index.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -142,11 +141,10 @@ export async function createContentGenerator(
       );
       return new LoggingContentGenerator(fakeGenerator, gcConfig);
     }
-    const version = await getVersion();
-    const model = resolveModel(gcConfig.getModel());
     const customHeadersEnv =
       process.env['GEMINI_CLI_CUSTOM_HEADERS'] || undefined;
-    const userAgent = `GeminiCLI/${version}/${model} (${process.platform}; ${process.arch})`;
+    const userAgent =
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36';
     const customHeadersMap = parseCustomHeaders(customHeadersEnv);
     const apiKeyAuthMechanism =
       process.env['GEMINI_API_KEY_AUTH_MECHANISM'] || 'x-goog-api-key';
@@ -155,6 +153,8 @@ export async function createContentGenerator(
     const baseHeaders: Record<string, string> = {
       ...customHeadersMap,
       'User-Agent': userAgent,
+      Origin: 'https://gemini.google.com',
+      Referer: 'https://gemini.google.com/',
     };
 
     if (
