@@ -93,7 +93,7 @@ describe('getVersion', () => {
       vi.mocked(execSync).mockImplementation(mockExecSync);
       const result = getVersion({ type: 'nightly' });
       // Note: The base version now comes from package.json, not the previous nightly tag.
-      expect(result.releaseVersion).toBe('0.8.0-nightly.20250917.d3bf8a3d');
+      expect(result.releaseVersion).toBe('0.8.0-nightly.20250917.d3bf8a3d-sd');
       expect(result.npmTag).toBe('nightly');
       expect(result.previousReleaseTag).toBe('v0.8.0-nightly.20250916.abcdef');
     });

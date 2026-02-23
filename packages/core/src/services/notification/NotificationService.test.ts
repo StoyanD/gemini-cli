@@ -12,6 +12,7 @@ import { MessageBusType } from '../../confirmation-bus/types.js';
 import { CoreEventEmitter } from '../../utils/events.js';
 import { isTerminalAppFocused } from './focusUtils.js';
 import { MockMessageBus } from '../../test-utils/mock-message-bus.js';
+import type { MessageBus } from 'src/confirmation-bus/message-bus.js';
 
 vi.mock('./focusUtils.js', () => ({
   isTerminalAppFocused: vi.fn(),
